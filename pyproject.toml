@@ -10,9 +10,9 @@ packages = [{ include = "gcr_chat" }]
 python = "^3.11"
 pydantic = "^2.5.3"
 
-uvicorn = { extras = ["full"], version = "^0.26.0", optional=true }
-fastapi = { version = "^0.109.0", optional=true }
-httpx = { version="^0.26.0", optional=true }
+uvicorn = { extras = ["full"], version = "^0.26.0", optional = true }
+fastapi = { version = "^0.109.0", optional = true }
+httpx = { version="^0.26.0", optional = true }
 
 [tool.poetry.extras]
 examples = ["uvicorn", "fastapi", "httpx"]
