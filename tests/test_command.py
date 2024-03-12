@@ -1,4 +1,5 @@
 """Test the command class."""
+
 from __future__ import annotations
 
 import inspect

@@ -1,4 +1,5 @@
 """Command model for the bot."""
+
 from __future__ import annotations
 
 import inspect
@@ -70,7 +71,7 @@ class Command(pydantic.BaseModel):
         for arg, dtype in zip(args, get_type_hints(self.fn).values(), strict=False):
             try:
                 parsed_args.append(dtype(arg))
-            except ValueError as e:
+            except ValueError as e:  # noqa: PERF203
                 logger.debug(e)
                 error = f"Could not convert {arg} to {dtype.__name__}."
                 logger.critical(error)

@@ -1,4 +1,5 @@
 """Exceptions for the Bot class."""
+
 from __future__ import annotations
 
 

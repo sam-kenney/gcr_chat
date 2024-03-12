@@ -1,4 +1,5 @@
 """Bot package."""
+
 __all__ = (
     "ArgumentParserError",
     "Bot",

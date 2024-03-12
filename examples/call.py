@@ -1,41 +1,47 @@
 """Call the example `main.py` endpoint."""
-import base64
+
+from __future__ import annotations
 
 import httpx
 
+from gcr_chat import PubSubChatRequest
+
 url = "http://localhost:8080/"
-
-
-def encode(s: str) -> str:
-    """Encode a message to send to the endpoint."""
-    return base64.b64encode(s.encode("utf8")).decode("utf-8")
 
 
 def call() -> None:
     """Call the endpoint."""
     resp = httpx.post(
         url,
-        json={
-            "message": {
-                "data": encode("hello"),
-            },
-        },
+        json=PubSubChatRequest.from_string("!greet me").model_dump(),
     )
 
     print(resp.text)  # noqa: T201
-    # "Hello, world!"
+    # "Hello, me! "
 
     resp = httpx.post(
         url,
-        json={
-            "message": {
-                "data": encode("hello me 4"),
-            },
-        },
+        json=PubSubChatRequest.from_string("!greet me 4").model_dump(),
     )
 
     print(resp.text)  # noqa: T201
-    # "Hello, me! Hello, me! Hello, me! Hello, me!"
+    # "Hello, me! Hello, me! Hello, me! Hello, me! "
+
+    resp = httpx.post(
+        url,
+        json=PubSubChatRequest.from_string("!int sum 2 4").model_dump(),
+    )
+
+    print(resp.text)  # noqa: T201
+    # "6"
+
+    resp = httpx.post(
+        url,
+        json=PubSubChatRequest.from_string("!float sum 6 2.2").model_dump(),
+    )
+
+    print(resp.text)  # noqa: T201
+    # "8.2"
 
 
 if __name__ == "__main__":
